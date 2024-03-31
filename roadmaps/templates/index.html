@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+   <title>Pathfinder - Main</title>
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="container">
+        <nav>
+            <div class="project-info">
+                <div class="logo"></div>
+                <span class="project-name">Pathfinder</span>
+            </div>
+            <div class="about-block">
+                <span class="about-text">About project</span>
+                <a href="#about" class="about-button"></a>
+            </div>
+        </nav>
+        <span class="catchphrase">Your guide to the world of knowledge</span>
+        <form action="/" class="skill-form" method="post">
+            {% csrf_token %}
+            <input type="text" name="name" class="skill-input" id="skill-input" placeholder="I want to learn ...">
+            <button type="submit" class="skill-submit" id="skill-submit"><div class="search"></div></button>
+        </form>
+        <div id="result-menu">
+            <ul id="results"></ul>
+        </div>
+    </div>
+    <div class="about" id="about">
+        <h2 class="about-title">About our project</h2>
+        <span class="about-info">
+            Lorem ipsum dolor sit amet consectetur. Egestas proin sed cursus nisl sapien. Velit amet nam eget semper pretium dignissim iaculis id sit. Maecenas tincidunt velit vestibulum in etiam sapien nibh. In accumsan facilisi diam in amet tellus. Est lacus molestie massa leo volutpat. Quis semper consectetur adipiscing sit nisi est purus tortor interdum. Venenatis purus ipsum at venenatis consequat sed morbi. Elit at at consequat mattis nibh euismod augue sagittis fermentum. Nulla dui suscipit scelerisque duis vel. Aliquet sed orci auctor pharetra sollicitudin eget nec. Ac maecenas nisl et eleifend sit vitae. Et sit nulla interdum fermentum volutpat lectus diam. Enim dis lectus ultricies morbi leo nunc facilisis. <br><br>
+Vitae enim urna viverra proin fusce orci urna. Ornare pellentesque scelerisque massa justo et in. Tempus eu ac pretium ac enim ultrices auctor magna eget. Laoreet pulvinar dui auctor gravida quis nunc viverra eu. Ac morbi velit amet pretium elementum ut. Natoque nisl mauris cras et purus. Tempor donec sagittis egestas ultrices at in pharetra bibendum quis. Pharetra at ipsum aliquam mi. Odio suspendisse quis mi egestas fringilla. Fermentum condimentum tellus sed eu amet arcu erat ac. Vitae massa gravida dignissim et nulla venenatis. Luctus nunc elementum in donec elementum turpis velit consectetur. Suspendisse tortor consectetur morbi imperdiet.
+        </span>
+    </div>
+</div>
+<script>
+    const input = document.getElementById('skill-input');
+    const block = document.getElementById('skill-submit');
+
+    input.addEventListener('input', function() {
+        if (input.value.length > 0) {
+            block.style.display = 'flex';
+        } else {
+            block.style.display = 'none';
+        }
+    });
+</script>
+<script>
+    const searchInput = document.getElementById('skill-input');
+    const resultsList = document.getElementById('results');
+
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value;
+
+        if (query.length > 0) {
+            // Make an AJAX request to the backend
+             fetch(`/search?q=${query}`)
+                 .then(response => response.json())
+                 .then(data => {
+                     console.log(data)
+                    resultsList.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const listItem = document.createElement('li');
+
+                            const a = document.createElement('a'); // generate node
+                            a.setAttribute('href', `/skill/${item.id}`);
+                            a.textContent = item.name; // Replace with actual data from backend
+                            listItem.appendChild(a);
+                            resultsList.appendChild(listItem);
+                        });
+                    } else {
+                        const noResultsItem = document.createElement('li');
+                        noResultsItem.textContent = 'No results found.';
+                        resultsList.appendChild(noResultsItem);
+                    }
+                 })
+                 .catch(error => {
+                     console.error('Error fetching data:', error);
+                 });
+        } else {
+            resultsList.innerHTML = ''; // Clear results if input is empty
+        }
+    });
+</script>
+{% endblock %}
+
+<form method="POST" enctype="multipart/form-data">
+
+    <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit">
+</form>

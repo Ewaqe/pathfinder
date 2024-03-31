@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/roadmap.css' %}" media="screen" />
+    <title>Pathfinder - Roadmap</title>
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="container">
+        <nav>
+            <div class="project-info">
+                <div class="logo"></div>
+                <span class="project-name">Pathfinder</span>
+            </div>
+            <div class="about-block">
+                <span class="about-text">About project</span>
+                <a href="/#about" class="about-button"></a>
+            </div>
+        </nav>
+        <div class="content">
+            <span class="picked-skill">I want to learn {{ skill }}</span>
+            <div class="roadmap">
+                {% for topic in topics %}
+                    <div class="topic">
+                        <button data-target="{{ topic.id }}" class="topic-content {{ topic.color }}">{{ topic.name }}</button>
+                        <div class="topic-arrow"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="hidden">
+        <div class="popup-block">
+            <div class="popup-head">
+                <span class="topic-name"></span>
+                <button id="close-popup"></button>
+            </div>
+            <div class="popup-content">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const popup = document.getElementById('popup');
+    const closeButton = document.getElementById('close-popup');
+
+    const buttons = document.querySelectorAll('button[data-target]');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.target;
+        loadContent(target);
+        popup.classList.add('visible');
+      });
+    });
+
+    closeButton.addEventListener('click', () => {
+      popup.classList.remove('visible');
+    });
+
+    function loadContent(target) {
+        const url = `/topic?id=${target}`;
+        fetch(url)
+            .then(response => response.text())
+            .then(content => {
+                content = JSON.parse(content)
+                popup.querySelector('.popup-content').innerHTML = content['text'];
+                popup.querySelector('.topic-name').innerHTML = content['name'];
+            });
+    }
+</script>
+{% endblock %}

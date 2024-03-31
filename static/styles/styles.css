@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('/static/fonts/gothampro.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {
+    height: 100vh;
+    background-image: url('/static/images/gradient_background.svg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    width: 95%;
+    height: 104px;
+    background-color: rgba(33, 29, 35, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.project-info, .about-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo {
+    width: 64px;
+    height: 64px;
+    background-image: url('/static/images/logotype.svg');
+    background-repeat: no-repeat;
+    margin-right: 12px;
+}
+
+.project-name {
+    font-family: "League Spartan";
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: left;
+    color: rgba(242, 140, 76, 1);
+}
+
+.about-text {
+    font-family: "Gotham Pro";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 15px;
+    text-align: left;
+    color: rgba(242, 140, 76, 1);
+    margin-right: 8px;
+}
+
+.about-button {
+    width: 20px;
+    height: 20px;
+    background-image: url('/static/images/about_button.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+}
+
+.catchphrase {
+    margin-top: 5%;
+    font-family: "League Spartan";
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    color: white;
+}
+
+.skill-form {
+    display: flex;
+    flex-direction: row;
+    width: 526px;
+    height: 70px;
+    margin-top: 10%;
+    background: rgba(33, 29, 35, 0.8);
+    border: 1px solid white;
+    border-radius: 2px;
+    align-items: center;
+}
+.skill-input {
+    display: flex;
+    flex-grow: 2;
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 24px 68px 24px 24px;
+    font-family: "Gotham Pro";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+    color: white;
+}
+
+#result-menu {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 526px;
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#results {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#results li {
+    border-bottom: 1px solid #eee;
+    background: white;
+    width: 526px;
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#results li:hover {
+    background-color: gray;
+}
+
+li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+.skill-submit {
+    display: none;
+    background-color: #45328B;
+    width: 68px;
+    height: 68px;
+    align-items: center;
+    justify-content: center;
+}
+
+.search {
+    width: 36px;
+    height: 36px;
+    background-image: url('/static/images/search.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.about-title {
+    font-family: "Gotham Pro";
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 46px;
+    text-align: center;
+    color: #232550;
+    margin-top: 132px;
+}
+
+.about-info {
+    margin-top: 48px;
+    width: 800px;
+    font-family: "Gotham Pro";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    color: black;
+}
